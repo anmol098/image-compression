@@ -1,0 +1,102 @@
+{
+	"info": {
+		"_postman_id": "f45a8f0f-dfc4-4b65-9415-056b4d6ef60a",
+		"name": "image-compression-app",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "18055059"
+	},
+	"item": [
+		{
+			"name": "Request Compression",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "image",
+							"type": "file",
+							"src": "/Users/anmolsingh/Desktop/Screenshot 2022-09-24 at 15.49.51.png"
+						},
+						{
+							"key": "compressionLevel",
+							"value": "90",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:3000/image",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"image"
+					]
+				},
+				"description": "Route to submit the image for compression  \n  \nthis route will return the request id which can be used further to get the status of image compression and download the image"
+			},
+			"response": []
+		},
+		{
+			"name": "Get Image Compression Status",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/status/:request_id",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"status",
+						":request_id"
+					],
+					"variable": [
+						{
+							"key": "request_id",
+							"value": "cea6cc06-7c55-4866-a039-1120a48d5197",
+							"description": "Request Id Received From Compression request route"
+						}
+					]
+				},
+				"description": "GET route to get the status of the request id"
+			},
+			"response": []
+		},
+		{
+			"name": "download compressed image",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/image/download/:linkReference",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"image",
+						"download",
+						":linkReference"
+					],
+					"variable": [
+						{
+							"key": "linkReference",
+							"value": "cea6cc06-7c55-4866-a039-1120a48d5197.png",
+							"description": "This is request id with image extension. this url will be provided in get status api"
+						}
+					]
+				},
+				"description": "ROute to download the compressed image"
+			},
+			"response": []
+		}
+	]
+}

@@ -12,7 +12,9 @@ then the image is compressed asynchronously and the compressed image is availabl
 - npm >= 8.4.1
 - pm2
 - docker >= 20.10.17
-- redis running on port 6379 can be provided by env variable also not required if using docker to run the project
+- redis running on port 6379 
+  - host and port can be provided by env variable also 
+  - if using docker to run the project then these details are not required
 
 
 ## installation
@@ -21,8 +23,8 @@ then the image is compressed asynchronously and the compressed image is availabl
 npm install
 ```
 
-## how to run 
-
+# How to run 
+## In local machine
 ### development
 
 ```shell
@@ -35,12 +37,32 @@ npm run dev
 npm run start
 ```
 
+## Using Docker
+
 ### docker
+
+start the docker engine and run the following command
 
 ```shell
 ./startapp.sh run
 ```
-make sure ./startapp.sh has execution permission
-
+make sure `./startapp.sh` has execution permission
 this will start app on port 3000
 
+```shell
+./startapp.sh stop
+```
+this will stop the app
+
+```shell
+./startapp.sh clean
+```
+this will remove all the stopped container and images
+
+
+For more information about the api please check the postman collection attached in repository
+
+### swagger
+
+swagger documentation is available at /api-docs
+http://localhost:3000/api-docs/

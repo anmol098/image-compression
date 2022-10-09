@@ -1,0 +1,78 @@
+openapi: 3.0.0
+info:
+  title: image-compression-app
+  version: 1.0.0
+servers:
+  - url: http://localhost:3000
+paths:
+  /image:
+    post:
+      tags:
+        - General
+      summary: Request Compression
+      description: >-
+        Route to submit the image for compression  
+        
+        this route will return the request id which can be used further to get
+        the status of image compression and download the image
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                image:
+                  type: string
+                  format: binary
+                  required: true
+                  description: Image Path
+                compressionLevel:
+                  type: integer
+                  example: '90'
+                  required: true
+                  description: Compression Level between [0-100]
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: { }
+  /status/{request_id}:
+    get:
+      tags:
+        - General
+      summary: Get Image Compression Status
+      description: GET route to get the status of the request id
+      parameters:
+        - name: request_id
+          in: path
+          schema:
+            type: string
+          required: true
+          description: Request Id Received From Compression request api
+          example: cea6cc06-7c55-4866-a039-1120a48d5197
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: { }
+  /image/download/{linkReference}:
+    get:
+      tags:
+        - General
+      summary: download compressed image
+      description: ROute to download the compressed image
+      parameters:
+        - name: linkReference
+          in: path
+          schema:
+            type: string
+          required: true
+          description: >-
+            This is request id with image extension. this url will be provided
+            in get status api
+          example: cea6cc06-7c55-4866-a039-1120a48d5197.png
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: { }
