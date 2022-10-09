@@ -13,6 +13,10 @@ jobQueue.init()
 
 
 async function AcceptImageCompressionRequest(req, res, next) {
+    if(!req.file){
+        next(new ErrorHandler(STATUS_CODE.BAD_REQUEST, STATUS_MESSAGE.BAD_REQUEST, "Please provide a valid image"));
+        return;
+    }
     const {filename, path, mimetype} = req.file;
     var {compressionLevel} = req.body;
     if (compressionLevel === undefined) {
