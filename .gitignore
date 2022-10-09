@@ -1,2 +1,4 @@
 # Project exclude paths
 /node_modules/
+/database.sqlite3
+/dump.rdb
